@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var Post = require('../models/post.js');
 
 router.get('/posts/', getAllPosts);
 router.post('/posts', createPost);
-router.get('/posts/:id', getPost);
+router.get('/posts/:id', getPostById);
 router.delete('/posts/:id', deletePost);
 router.put('/posts/:id', updatePost);
 
@@ -14,10 +15,26 @@ function getAllPosts(req, res, next){
   next();
 }
 function createPost(req, res, next){
-  console.log('creating a post');
-  next();
+  var post = new Post({
+    title: req.body.title,
+    author: req.body.author,
+    body: req.body.body,
+    created: new Date(),
+    updated: new Date()
+  });
+  post.save(function(err, newPost){
+    if(err){
+      res.status(500).json({
+        msg: err
+      });
+    } else{
+      res.status(201).json({
+        post: newPost
+      })
+    }
+  });
 }
-function getPost(req, res, next){
+function getPostById(req, res, next){
   console.log('getting a post');
   next();
 }
