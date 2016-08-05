@@ -57,8 +57,17 @@ function getPostById(req, res, next){
   })
 }
 function deletePost(req, res, next){
-  console.log('deleting a post');
-  next();
+  Post.remove({_id: req.params.id}, function(err, foundPost){
+    if(err){
+      res.status(500).json({
+        msg: err
+      });
+    } else {
+      res.status(200).json({
+        msg: 'Delete successful!'
+      })
+    }
+  })
 }
 function updatePost(req, res, next){
   Post.findOneAndUpdate({_id: req.params.id}, req.body, function(err, oldPost){
