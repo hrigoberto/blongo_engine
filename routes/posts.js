@@ -67,7 +67,7 @@ function deletePost(req, res, next){
         msg: 'Delete successful!'
       })
     }
-  })
+  });
 }
 function updatePost(req, res, next){
   Post.findOneAndUpdate({_id: req.params.id}, req.body, function(err, oldPost){
@@ -80,5 +80,5 @@ function updatePost(req, res, next){
         oldPost: oldPost
       });
     }
-  })
+  });
 }

@@ -34,5 +34,9 @@ var commentSchema = new Schema({
   // }
 });
 
+commentSchema.pre('findOneAndUpdate', function(){
+  this.update({}, { $set: {updated: new Date()}})
+});
+
 var Comment = mongoose.model('Comment', commentSchema);
 module.exports = Comment;

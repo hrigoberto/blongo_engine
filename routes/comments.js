@@ -48,6 +48,15 @@ function deleteComment(req, res, next){
   });
 }
 function updateComment(req, res, next){
-  console.log('updating a comment');
-  next();
+  Comment.findOneAndUpdate({_id: req.params.id}, req.body, function(err, oldComment){
+    if(err){
+      res.status(500).json({
+        msg: err
+      });
+    } else {
+      res.status(200).json({
+        oldComment: oldComment
+      });
+    }
+  })
 }
