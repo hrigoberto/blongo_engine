@@ -35,7 +35,7 @@ function createComment(req, res, next){
   });
 }
 function deleteComment(req, res, next){
-  Comment.remove({_id: req.params.id}, function(err, foundComment){
+  Comment.remove({_id: req.params.commentId}, function(err, foundComment){
     if(err){
       res.status(500).json({
         msg:err
@@ -48,7 +48,8 @@ function deleteComment(req, res, next){
   });
 }
 function updateComment(req, res, next){
-  Comment.findOneAndUpdate({_id: req.params.id}, req.body, function(err, oldComment){
+  console.log(req.params);
+  Comment.findOneAndUpdate({_id: req.params.commentId}, req.body, function(err, oldComment){
     if(err){
       res.status(500).json({
         msg: err
