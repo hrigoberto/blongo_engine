@@ -2,10 +2,14 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var commentSchema = new Schema({
+  // author: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   required: true,
+  //   ref: 'User'
+  // },
   author: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'User'
+    type: String,
+    required: true
   },
   body: {
     type: String,
@@ -20,10 +24,14 @@ var commentSchema = new Schema({
     required: true
   },
   post: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'Post'
+    type: String,
+    required: true
   }
+  // post: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   required: true,
+  //   ref: 'Post'
+  // }
 });
 
 var Comment = mongoose.model('Comment', commentSchema);
