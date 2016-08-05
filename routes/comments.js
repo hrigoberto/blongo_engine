@@ -34,11 +34,20 @@ function createComment(req, res, next){
     }
   });
 }
-function deleteComment(req, req, next){
-  console.log('deleting a comment');
-  next();
+function deleteComment(req, res, next){
+  Comment.remove({_id: req.params.id}, function(err, foundComment){
+    if(err){
+      res.status(500).json({
+        msg:err
+      });
+    } else {
+      res.status(200).json({
+        msg: 'Delete Successful'
+      })
+    }
+  });
 }
-function updateComment(req, req, next){
+function updateComment(req, res, next){
   console.log('updating a comment');
   next();
 }
