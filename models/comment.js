@@ -2,14 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var commentSchema = new Schema({
-  // author: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   required: true,
-  //   ref: 'User'
-  // },
   author: {
-    type: String,
-    required: true
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
   },
   body: {
     type: String,
@@ -24,14 +20,10 @@ var commentSchema = new Schema({
     required: true
   },
   post: {
-    type: String,
-    required: true
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Post'
   }
-  // post: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   required: true,
-  //   ref: 'Post'
-  // }
 });
 
 commentSchema.pre('findOneAndUpdate', function(){

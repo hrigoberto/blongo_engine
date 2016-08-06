@@ -14,9 +14,6 @@ var postSchema = new Schema({
     type: Date,
     required: true
   },
-  // author: {
-  //   type: String
-  // },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
