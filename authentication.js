@@ -9,12 +9,13 @@ module.exports = {
 
 function signup(req, res){
   var user = new User(req.body);
-
   user.setPassword(req.body.password);
+  console.log(user);
   user.save(function(err){
     if(err){
       return res.status(500).json({
-        msg: 'error!'
+        msg: 'error!',
+        err: err
       })
     }
     var token = user.generateJwt();
@@ -25,7 +26,8 @@ function signup(req, res){
   });
 }
 function login(req, res){
-  passport.authenticate('local', function(err, user, info){
+  passport.authenticate('local', {session: false},
+   function(err, user, info){
     if(err){
       return res.status(500).json({
         msg: 'Authentication Failed'
@@ -40,5 +42,5 @@ function login(req, res){
     } else {
       return res.status(401).json(info);
     }
-  })
+  })(req, res)
 }

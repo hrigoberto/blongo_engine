@@ -6,6 +6,8 @@ var commentRouter = require('./routes/comments.js')
 var postRouter = require('./routes/posts.js')
 var userRouter = require('./routes/users.js')
 var mongoose = require('mongoose');
+var passport = require('passport');
+require('./config/passport.js');
 
 var port = process.env.PORT || 8080;
 var mongoURI = process.env.MONGOURI || require('./config.js').mongoURI;
@@ -14,9 +16,11 @@ mongoose.connect(mongoURI);
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(cors());
+server.use(passport.initialize());
 server.use(commentRouter);
 server.use(postRouter);
 server.use(userRouter);
+
 
 server.get('/', function(req, res){
   res.send('Booya!')
